@@ -11,7 +11,7 @@ WriteMakefile(
     PREREQ_PM => {
         'Test::More'                        => 0,
         'version'                           => 0,
-        'Moose'                             => 0,
+        'Moose'                             => '0.51',
         'Moose::Util::TypeConstraints'      => 0,
         'XML::Compile::WSDL11'              => 0,
         'XML::Compile::Transport::SOAPHTTP' => 0,

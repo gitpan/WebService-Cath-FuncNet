@@ -1,5 +1,9 @@
 Revision history for WebService-Cath-FuncNet
 
-0.01   Tue Oct 21 14:57:14 2008
-       Initial release (r6608)
+0.01   Tue Oct 21 14:57:14 2008 (r6608)
+       Initial release
 
+0.02   Mon Oct 27 10:56:48 (r6611)
+       Changed pre-requisite to Moose 0.51 (require BUILDARGS)
+       Corrected some perlcritic/coverage tests
+       

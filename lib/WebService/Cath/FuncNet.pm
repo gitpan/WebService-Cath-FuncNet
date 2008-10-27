@@ -47,7 +47,7 @@ use File::Temp qw( tempfile );
 use Readonly;
 use Data::Dumper;
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 #Readonly my $WSDL_HOST       => 'http://bsmlx47:8080';
 Readonly my $WSDL_HOST       => 'http://cathdb.info:8080';
