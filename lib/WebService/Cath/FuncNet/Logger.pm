@@ -14,7 +14,7 @@ Provides singleton Log4perl logging object
 
     use WebService::Cath::FuncNet::Logger;
     
-    $logger = WebService::Cath::FuncNet::Logger->new( __PACKAGE__ );
+    $logger = get_logger();
 
     sub class_method {
         $logger->info( "foo" );
@@ -24,26 +24,13 @@ Provides singleton Log4perl logging object
 
 use Moose;
 
-use Log::Log4perl;
+use Log::Log4perl qw( get_logger );
+
+use base 'Exporter';
+
+our @EXPORT = qw( get_logger );
 
 with 'WebService::Cath::FuncNet::Logable';
-
-=head2 BUILDARGS
-
-Builds logger from single argument parameter
-
-=cut
-
-sub BUILDARGS {
-    my $class = shift;
-    my $args  = @_ == 1
-                    ? {
-                        'logger' => Log::Log4perl->get_logger( $_[0] ),
-                      }
-                    : { @_ };
-    
-    return $args;
-}
 
 1; # Magic true value required at end of module
 __END__

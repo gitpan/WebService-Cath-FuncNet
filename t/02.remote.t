@@ -1,12 +1,22 @@
-use Test::More tests => 8;
+use Test::More;
 use strict;
 use warnings;
 
-BEGIN {
-use_ok( 'WebService::Cath::FuncNet' );
+use FindBin;
+use URI::file;
+
+if ($ENV{TEST_FUNCNET_REMOTE}) {
+    plan tests => 8;
+}
+else {
+    plan skip_all => 'Remote tests. Set $ENV{TEST_FUNCNET_REMOTE} to a true value to run.'
 }
 
-isa_ok( my $ws = WebService::Cath::FuncNet->new(), 'WebService::Cath::FuncNet' );
+use_ok( 'WebService::Cath::FuncNet' );
+
+my ( $ws, $wsdl, $wsdl_uri );
+
+isa_ok( $ws = WebService::Cath::FuncNet->new(), 'WebService::Cath::FuncNet', 'new (default URI)' );
 
 my @proteins1 = qw( A3EXL0 Q8NFN7 O75865 );
 my @proteins2 = qw( Q5SR05 Q9H8H3 P22676 );

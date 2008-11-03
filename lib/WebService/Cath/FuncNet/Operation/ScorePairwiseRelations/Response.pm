@@ -25,7 +25,7 @@ use Data::Dumper;
 
 with 'WebService::Cath::FuncNet::Logable';
 
-my $logger = WebService::Cath::FuncNet::Logger->new( __PACKAGE__ );
+my $logger = get_logger();
 
 =head2 BUILDARGS
 

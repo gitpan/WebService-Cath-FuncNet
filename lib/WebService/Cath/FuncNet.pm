@@ -6,7 +6,7 @@ WebService::Cath::FuncNet - Interface to the CATH FuncNet webservice
 
 =head1 VERSION
 
-This document describes WebService::Cath::FuncNet version 0.01
+This document describes WebService::Cath::FuncNet version 0.03
 
 =head1 SYNOPSIS
 
@@ -28,6 +28,13 @@ This document describes WebService::Cath::FuncNet version 0.01
             ), "\n";
     }
 
+This module provides a simple API to the CATH FuncNet WebService and the documentation
+provided here refers to the usage and implementation of the API rather than the details
+of the actual FuncNet WebServices. For more information on FuncNet, it is best to visit
+the project homepage at:
+
+   http://cathdb.info/wiki/projects:FuncNet
+
 =cut
 
 use Moose;
@@ -42,12 +49,14 @@ use WebService::Cath::FuncNet::Operation::ScorePairwiseRelations;
 
 use Carp;
 use URI;
+use URI::Heuristic;
+use URI::file;
 use LWP::UserAgent;
 use File::Temp qw( tempfile );
 use Readonly;
 use Data::Dumper;
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 #Readonly my $WSDL_HOST       => 'http://bsmlx47:8080';
 Readonly my $WSDL_HOST       => 'http://cathdb.info:8080';
@@ -56,21 +65,23 @@ Readonly my $FUNCNET_NS      => '{http://cathdb.info/FuncNet_0_1/}';
 
 with 'WebService::Cath::FuncNet::Logable';
 
-my $logger = WebService::Cath::FuncNet::Logger->new( __PACKAGE__ );
-
-subtype 'URI'
-    => as 'Object'
-    => where { $_->isa('URI') };
+my $logger = get_logger();
 
 subtype 'WebService::Cath::FuncNet::WSDL'
     => as 'Object'
     => where { $_->isa( 'XML::Compile::WSDL11' ) };
 
+subtype 'Uri'
+    => as 'Object'
+    => where { $_->isa( 'URI' ) };
+
 coerce 'WebService::Cath::FuncNet::WSDL'
-    => from 'URI'
-        => via { wsdl_from_uri( $_ ) }
+    => from 'Uri'
+        => via { wsdl_from_uri( $_ ) };
+
+coerce 'Uri'
     => from 'Str'
-        => via { URI->new( $_ ) };
+        => via { URI::Heuristic::uf_uri( $_ ) };
 
 =head1 ACCESSORS
 
@@ -93,7 +104,8 @@ Coercions:
 has 'wsdl' => (
     is => 'rw',
     isa => 'WebService::Cath::FuncNet::WSDL',
-    default => sub { wsdl_from_uri( URI->new( $WSDL_REMOTE_URL ) ) },
+    default => sub { wsdl_from_uri( $WSDL_REMOTE_URL ) },
+    coerce => 1,
 );
 
 =head2 ns_base
@@ -184,14 +196,68 @@ String or URI object pointing to the location of the external FuncNet WSDL
 sub wsdl_from_uri {
     my $uri = shift;
     
-    $logger->debug( "download_wsdl: $uri" );
-    my $fh_wsdl_tmp = download_wsdl_to_tmp_file( $uri );
+    # coerce Str to URI
+    if ( !blessed $uri ) {
+        $uri = new URI( $uri )
+            or die "couldn't create URI from $uri";
+    }
     
-    $logger->debug( "create new XML::Compile: $fh_wsdl_tmp" );
-    my $wsdl        = XML::Compile::WSDL11->new( $fh_wsdl_tmp );
+    # coerce external URI::http to local tmp URI::file
+    if ( $uri->isa( 'URI::http' ) ) {
+        $logger->debug( "coercing URI::http to URI::file ($uri)" );
+        my $filename_wsdl_tmp = download_wsdl_to_tmp_file( $uri )
+            or $logger->error( "couldn't download WSDL to tmp file" );
+        
+        $uri = new URI::file( $filename_wsdl_tmp )
+            or $logger->error( "couldn't create URI::file from file '$filename_wsdl_tmp'" );
+    }
+    
+    # deal with local
+    if ( $uri->isa( 'URI::file' ) ) {
+        $logger->debug( "coercing URI::file to XML::Compile ($uri)" );
+        return wsdl_from_filename( $uri->file );
+    }
+    else {
+        $logger->error( "couldn't understand URI '". blessed($uri) ."'" );
+    }
+    
+    return;
+}
+
+=head2 wsdl_from_filename( $wsdl_filename )
+
+Class method that creates and returns a XML::Compile::WSDL11 object from a local file
+
+=head3 PARAMS
+
+=over 8
+
+=item $wsdl_filename
+
+Filename of the WSDL
+
+=back
+
+=head3 RETURNS
+
+=over 8
+
+=item XML::Compile::WSDL11
+
+=back
+
+=cut
+
+sub wsdl_from_filename {
+    my $wsdl_filename = shift;
+    
+    $logger->debug( "creating new XML::Compile from $wsdl_filename" );
+    my $wsdl        = XML::Compile::WSDL11->new( $wsdl_filename )
+        or $logger->error( "couldn't create XML::Compile::WSDL11 object from filename $wsdl_filename" );
     
     return $wsdl;
 }
+
 
 =head2 download_wsdl_to_tmp_file( $wsdl_uri )
 
@@ -218,13 +284,12 @@ temporary file containing the WSDL content
 =back
 
 
-
 =cut
 
 sub download_wsdl_to_tmp_file {
     my $uri = shift;
     
-    $logger->info( "uri: $uri" );
+    $logger->info( "downloading WSDL $uri to tmp file" );
     
     my $agent   = LWP::UserAgent->new;
     my $request = HTTP::Request->new( POST => $uri );
@@ -232,7 +297,7 @@ sub download_wsdl_to_tmp_file {
     my ( $tmp_fh, $tmp_filename ) = tempfile();
     
     if ($result->is_success) {
-        $logger->debug( "wsdl: ".Dumper( $result ) );
+        #$logger->debug( "wsdl: ".Dumper( $result ) );
         
         print $tmp_fh $result->content
             or croak "couldn't write WSDL to temp file '$tmp_filename': $!";

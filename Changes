@@ -6,4 +6,33 @@ Revision history for WebService-Cath-FuncNet
 0.02   Mon Oct 27 10:56:48 (r6611)
        Changed pre-requisite to Moose 0.51 (require BUILDARGS)
        Corrected some perlcritic/coverage tests
+
+0.03   Mon Nov  3 16:37:46 (r6634)
+       Corrections to docs, tests, logging and coercions
        
+GENERAL:
+    - lib/WebService/Cath/FuncNet.pm
+        - corrected/added docs
+        - corrected coercions of WSDL attr
+        - made wsdl_from_uri more flexible (deals with strings and URI)
+
+TESTS:
+    - t/perlcritic.t
+        - removed requirement for perlcritic config file
+    - t/00.methods.t
+        - renamed to t/01.methods.t
+    - t/01.methods.t
+        - moved tests requiring remote connection to t/02.remote.t
+    - t/02.remote.t
+        - optional remote tests (based on $ENV{ TEST_FUNCNET_REMOTE })
+    - t/GecoService.wsdl
+        - Added local copy of the WSDL for basic tests
+
+LOGGING:
+    - lib/WebService/Cath/FuncNet/Logger.pm
+        - This now just uses the Logable role and automatically exports 
+            the 'get_logger' method, e.g.
+
+            package MyClass;
+            use WebService::Cath::FuncNet::Logger;
+            $logger = get_logger();

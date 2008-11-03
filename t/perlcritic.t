@@ -1,7 +1,6 @@
 #!perl
 use strict;
 use warnings;
-use File::Spec;
 use Test::More;
 use English qw(-no_match_vars);
 
@@ -17,7 +16,5 @@ if ( $EVAL_ERROR ) {
     plan( skip_all => $msg );
 }
 
-# my $rcfile = File::Spec->catfile( 't', 'perlcriticrc' );
-# Test::Perl::Critic->import( -profile => $rcfile );
 Test::Perl::Critic->import();
 all_critic_ok();
