@@ -6,7 +6,7 @@ WebService::Cath::FuncNet - Interface to the CATH FuncNet webservice
 
 =head1 VERSION
 
-This document describes WebService::Cath::FuncNet version 0.03
+This document describes WebService::Cath::FuncNet version 0.04
 
 =head1 SYNOPSIS
 
@@ -21,10 +21,10 @@ This document describes WebService::Cath::FuncNet version 0.03
 
     foreach $result ( @{ $response->results } ) {
         print join( ", ",
-                $entry->protein_1,      # Q9H8H3
-                $entry->protein_2,      # O75865
-                $entry->p_value,        # 0.445814
-                $entry->raw_score       # 0
+                $result->protein_1,      # Q9H8H3
+                $result->protein_2,      # O75865
+                $result->p_value,        # 0.445814
+                $result->raw_score       # 0
             ), "\n";
     }
 
@@ -56,7 +56,7 @@ use File::Temp qw( tempfile );
 use Readonly;
 use Data::Dumper;
 
-our $VERSION = '0.03';
+our $VERSION = '0.04';
 
 #Readonly my $WSDL_HOST       => 'http://bsmlx47:8080';
 Readonly my $WSDL_HOST       => 'http://cathdb.info:8080';
