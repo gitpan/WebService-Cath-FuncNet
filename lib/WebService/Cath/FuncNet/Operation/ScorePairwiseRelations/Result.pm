@@ -47,7 +47,7 @@ The raw score of the match
 
 has 'raw_score' => (
     is => 'rw',
-    isa => 'Int',
+    isa => 'Math::BigFloat',
     lazy_build => 1,
 );
 

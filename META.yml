@@ -1,0 +1,46 @@
+---
+name: WebService-Cath-FuncNet
+version: 0.05
+author:
+  - 'Ian Sillitoe <sillitoe@biochem.ucl.ac.uk>'
+abstract: Interface to the CATH FuncNet webservice
+license: perl
+resources:
+  license: http://dev.perl.org/licenses/
+requires:
+  Data::Dumper: 0
+  File::Temp: 0
+  LWP::UserAgent: 0
+  Log::Log4perl: 0
+  Moose: 0
+  Moose::Role: 0
+  Moose::Util::TypeConstraints: 0
+  Readonly: 0
+  Test::More: 0
+  URI: 0
+  URI::Heuristic: 0
+  URI::file: 0
+  XML::Compile::Schema: 0
+  XML::Compile::Transport::SOAPHTTP: 0
+  XML::Compile::WSDL11: 0
+  version: 0
+provides:
+  WebService::Cath::FuncNet:
+    file: lib/WebService/Cath/FuncNet.pm
+    version: 0.05
+  WebService::Cath::FuncNet::Logable:
+    file: lib/WebService/Cath/FuncNet/Logable.pm
+  WebService::Cath::FuncNet::Logger:
+    file: lib/WebService/Cath/FuncNet/Logger.pm
+  WebService::Cath::FuncNet::Operation:
+    file: lib/WebService/Cath/FuncNet/Operation.pm
+  WebService::Cath::FuncNet::Operation::ScorePairwiseRelations:
+    file: lib/WebService/Cath/FuncNet/Operation/ScorePairwiseRelations.pm
+  WebService::Cath::FuncNet::Operation::ScorePairwiseRelations::Response:
+    file: lib/WebService/Cath/FuncNet/Operation/ScorePairwiseRelations/Response.pm
+  WebService::Cath::FuncNet::Operation::ScorePairwiseRelations::Result:
+    file: lib/WebService/Cath/FuncNet/Operation/ScorePairwiseRelations/Result.pm
+generated_by: Module::Build version 0.2808
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.2.html
+  version: 1.2

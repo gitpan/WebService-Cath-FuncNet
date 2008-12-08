@@ -5,7 +5,16 @@ META.yml # Will be created by "make dist"
 Makefile.PL
 README
 lib/WebService/Cath/FuncNet.pm
+lib/WebService/Cath/FuncNet/Logable.pm
+lib/WebService/Cath/FuncNet/Logger.pm
+lib/WebService/Cath/FuncNet/Operation.pm
+lib/WebService/Cath/FuncNet/Operation/ScorePairwiseRelations.pm
+lib/WebService/Cath/FuncNet/Operation/ScorePairwiseRelations/Response.pm
+lib/WebService/Cath/FuncNet/Operation/ScorePairwiseRelations/Result.pm
 t/00.load.t
+t/01.methods.t
+t/02.remote.t
+t/GecoService.wsdl
 t/perlcritic.t
 t/pod-coverage.t
 t/pod.t

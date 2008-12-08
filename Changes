@@ -1,5 +1,9 @@
 Revision history for WebService-Cath-FuncNet
 
+0.05   Mon Dec  8 11:28:27 GMT 2008 (r6813)
+       Operation::ScorePairwiseRelations::Result
+        - corrected raw_score to Math::BigFloat (thanks Heinz)
+       Corrected MANIFEST listing
 
 0.04   Tue Nov  4 11:57:01 (r6637)
        Corrected stupid typos in SYNOPSIS
