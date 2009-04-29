@@ -1,6 +1,7 @@
-<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions name="FuncNet-0.1" targetNamespace="http://cathdb.info/FuncNet_0_1/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://cathdb.info/FuncNet_0_1/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<?xml version='1.0' encoding='UTF-8'?>
+<wsdl:definitions name="FuncNet-1.0" targetNamespace="http://funcnet.eu/FuncNet_1_0/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://funcnet.eu/FuncNet_1_0/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <wsdl:types>
-<xsd:schema targetNamespace="http://cathdb.info/FuncNet_0_1/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://cathdb.info/FuncNet_0_1/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<xsd:schema targetNamespace="http://funcnet.eu/FuncNet_1_0/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://funcnet.eu/FuncNet_1_0/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 		
 			<xsd:complexType name="ProteinList">
 				<xsd:annotation>
@@ -228,22 +229,22 @@
   </wsdl:binding>
   <wsdl:service name="GecoService">
     <wsdl:port binding="tns:GecoBinding" name="GecoPort">
-      <soap:address location="http://cathdb.info:8080/BioMiner-war/services/GecoService" />
+      <soap:address location="http://funcnet.eu:8080/BioMiner-war/services/GecoService" />
     </wsdl:port>
   </wsdl:service>
   <wsdl:service name="CodaCathService">
     <wsdl:port binding="tns:CodaCathBinding" name="CodaCathPort">
-      <soap:address location="http://cathdb.info:8080/BioMiner-war/services/CodaCathService" />
+      <soap:address location="http://funcnet.eu:8080/BioMiner-war/services/CodaCathService" />
     </wsdl:port>
   </wsdl:service>
   <wsdl:service name="HippiService">
     <wsdl:port binding="tns:HippiBinding" name="HippiPort">
-      <soap:address location="http://cathdb.info:8080/BioMiner-war/services/HippiService" />
+      <soap:address location="http://funcnet.eu:8080/BioMiner-war/services/HippiService" />
     </wsdl:port>
   </wsdl:service>
   <wsdl:service name="CodaPfamService">
     <wsdl:port binding="tns:CodaPfamBinding" name="CodaPfamPort">
-      <soap:address location="http://cathdb.info:8080/BioMiner-war/services/CodaPfamService" />
+      <soap:address location="http://funcnet.eu:8080/BioMiner-war/services/CodaPfamService" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

@@ -33,7 +33,7 @@ provided here refers to the usage and implementation of the API rather than the 
 of the actual FuncNet WebServices. For more information on FuncNet, it is best to visit
 the project homepage at:
 
-   http://cathdb.info/wiki/projects:FuncNet
+   http://funcnet.eu
 
 =cut
 
@@ -56,12 +56,12 @@ use File::Temp qw( tempfile );
 use Readonly;
 use Data::Dumper;
 
-our $VERSION = '0.05';
+our $VERSION = '0.06';
 
 #Readonly my $WSDL_HOST       => 'http://bsmlx47:8080';
-Readonly my $WSDL_HOST       => 'http://cathdb.info:8080';
-Readonly my $WSDL_REMOTE_URL => $WSDL_HOST . '/BioMiner-war/services/GecoService?wsdl';
-Readonly my $FUNCNET_NS      => '{http://cathdb.info/FuncNet_0_1/}';
+Readonly my $WSDL_HOST       => 'http://funcnet.eu';
+Readonly my $WSDL_REMOTE_URL => $WSDL_HOST . '/soap/Geco.wsdl';
+Readonly my $FUNCNET_NS      => '{http://funcnet.eu/FuncNet_1_0/}';
 
 with 'WebService::Cath::FuncNet::Logable';
 
@@ -91,7 +91,7 @@ Provides access to the underlying XML::Compile::WSDL11 object used to communicat
 
 By default this is created from the URL:
 
-  http://cathdb.info:8080/BioMiner-war/services/GecoService?wsdl
+  http://funcnet.eu/soap/Geco.wsdl
 
 Coercions:
 
@@ -112,7 +112,7 @@ has 'wsdl' => (
 
 Read-only access to the namespace string, e.g.
 
-  http://cathdb.info/FuncNet_0_1/
+  http://funcnet.eu/FuncNet_1_0/
 
 =cut
 

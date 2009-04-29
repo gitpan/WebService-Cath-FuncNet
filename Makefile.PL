@@ -1,31 +1,33 @@
 use strict;
 use warnings;
-use ExtUtils::MakeMaker;
+use inc::Module::Install;
+use 5.008;
 
-WriteMakefile(
-    NAME                => 'WebService::Cath::FuncNet',
-    AUTHOR              => 'Ian Sillitoe <sillitoe@biochem.ucl.ac.uk>',
-    VERSION_FROM        => 'lib/WebService/Cath/FuncNet.pm',
-    ABSTRACT_FROM       => 'lib/WebService/Cath/FuncNet.pm',
-    PL_FILES            => {},
-    PREREQ_PM => {
-        "Test::More"                        => 0,
-        "version"                           => 0,
-        "Data::Dumper"                      => 0,
-        "File::Temp"                        => 0,
-        "LWP::UserAgent"                    => 0,
-        "Log::Log4perl"                     => 0,
-        "Moose"                             => 0,
-        "Moose::Role"                       => 0,
-        "Moose::Util::TypeConstraints"      => 0,
-        "Readonly"                          => 0,
-        "URI"                               => 0,
-        "URI::Heuristic"                    => 0,
-        "URI::file"                         => 0,
-        "XML::Compile::Schema"              => 0,
-        "XML::Compile::Transport::SOAPHTTP" => 0,
-        "XML::Compile::WSDL11"              => 0,
-    },
-    dist                => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
-    clean               => { FILES => 'WebService-Cath-FuncNet-*' },
-);
+name 'WebService-Cath-FuncNet';
+perl_version '5.008';
+all_from 'lib/WebService/Cath/FuncNet.pm';
+license 'perl';
+
+# prereqs
+
+requires "LWP::UserAgent"                    => '5.822';
+requires "Log::Log4perl"                     => '1.20';
+requires "Moose"                             => '0.64';
+requires "Readonly"                          => '1.03';
+requires "URI"                               => '1.37';
+requires "URI::Heuristic"                    => '4.18';
+requires "URI::file"                         => '4.20';
+requires "XML::Compile::Schema"              => '0.87';
+requires "XML::Compile::Transport::SOAPHTTP" => '0.74';
+requires "XML::Compile::WSDL11"              => '0.74';
+
+# things the tests need
+build_requires 'Test::More'      => '0.77';
+
+auto_install;
+
+tests_recursive();
+
+auto_manifest();
+
+WriteAll();

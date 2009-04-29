@@ -11,6 +11,7 @@ Represents a result from the 'ScorePairwiseRelations' operation
 =cut
 
 use Moose;
+use WebService::Cath::FuncNet::Types qw/ Float /;
 use Moose::Util::TypeConstraints;
 
 =head1 ATTRIBUTES
@@ -47,7 +48,8 @@ The raw score of the match
 
 has 'raw_score' => (
     is => 'rw',
-    isa => 'Math::BigFloat',
+    isa => 'Float',
+    coerce => 1,
     lazy_build => 1,
 );
 
@@ -59,7 +61,8 @@ The p-value of the match
 
 has 'p_value' => (
     is => 'rw',
-    isa => 'Math::BigFloat',
+    isa => 'Float',
+    coerce => 1,
     lazy_build => 1,
 );
 

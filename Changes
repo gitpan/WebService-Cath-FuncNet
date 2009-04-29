@@ -1,5 +1,10 @@
 Revision history for WebService-Cath-FuncNet
 
+0.06   Wed Apr 29 15:13:41 BST 2009 (r7969)
+        - added explicit coercion to Math::BigFloat
+        - corrected WSDL namespace:
+           http://funcnet.eu/ => http://funcnet.eu/FuncNet_1_0/
+
 0.05   Mon Dec  8 11:28:27 GMT 2008 (r6813)
        Operation::ScorePairwiseRelations::Result
         - corrected raw_score to Math::BigFloat (thanks Heinz)
