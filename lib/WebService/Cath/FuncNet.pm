@@ -40,6 +40,7 @@ the project homepage at:
 use Moose;
 use Moose::Util::TypeConstraints;
 
+use XML::Compile::SOAP11;
 use XML::Compile::WSDL11;
 use XML::Compile::Transport::SOAPHTTP;
 use XML::Compile::Schema;
@@ -56,7 +57,7 @@ use File::Temp qw( tempfile );
 use Readonly;
 use Data::Dumper;
 
-our $VERSION = '0.06';
+our $VERSION = '0.07';
 
 #Readonly my $WSDL_HOST       => 'http://bsmlx47:8080';
 Readonly my $WSDL_HOST       => 'http://funcnet.eu';

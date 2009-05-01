@@ -1,4 +1,4 @@
-package WebServices::Cath::FuncNet::Types;
+package WebService::Cath::FuncNet::Types;
 
 use MooseX::Types
     -declare => [qw(
