@@ -6,7 +6,7 @@ WebService::Cath::FuncNet - Interface to the CATH FuncNet webservice
 
 =head1 VERSION
 
-This document describes WebService::Cath::FuncNet version 0.05
+This document describes WebService::Cath::FuncNet version 0.08
 
 =head1 SYNOPSIS
 
@@ -57,7 +57,7 @@ use File::Temp qw( tempfile );
 use Readonly;
 use Data::Dumper;
 
-our $VERSION = '0.07';
+our $VERSION = '0.08';
 
 #Readonly my $WSDL_HOST       => 'http://bsmlx47:8080';
 Readonly my $WSDL_HOST       => 'http://funcnet.eu';
