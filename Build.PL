@@ -14,6 +14,7 @@ my $builder = Module::Build->new(
         "LWP::UserAgent"                    => '5.822',
         "Log::Log4perl"                     => '1.20',
         "Moose"                             => '0.64',
+        "MooseX::Types"                     => '0.08',
         "Readonly"                          => '1.03',
         "URI"                               => '1.37',
         "URI::Heuristic"                    => '4.18',
