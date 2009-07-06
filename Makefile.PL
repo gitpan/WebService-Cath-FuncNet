@@ -5,7 +5,7 @@ use 5.008;
 
 name 'WebService-Cath-FuncNet';
 perl_version '5.008';
-all_from 'lib/WebService/Cath/FuncNet.pm';
+all_from 'lib/WebService/FuncNet/Predictor.pm';
 license 'perl';
 
 # prereqs
@@ -26,9 +26,9 @@ requires "XML::Compile::WSDL11"              => '2.04';
 # things the tests need
 build_requires 'Test::More'      => '0.77';
 
-auto_install;
-
 tests_recursive();
+
+auto_install;
 
 auto_manifest();
 

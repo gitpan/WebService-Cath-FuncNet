@@ -1,18 +1,18 @@
-package WebService::Cath::FuncNet::Logable;
+package WebService::FuncNet::Predictor::Logable;
 
 =head1 NAME
 
-WebService::Cath::FuncNet::Logable
+WebService::FuncNet::Predictor::Logable
 
 =head1 SYNOPSIS
 
 Provides logging functionality as a Moose Role
 
-    package WebService::Cath::FuncNet::NewClass;
+    package WebService::FuncNet::Predictor::NewClass;
 
     use Moose;
 
-    with 'WebService::Cath::FuncNet::Logable';
+    with 'WebService::FuncNet::Predictor::Logable';
     
     sub do_something {
         $self = shift;
@@ -66,3 +66,14 @@ Copyright (c) 2008, Ian Sillitoe C<< <sillitoe@biochem.ucl.ac.uk> >>. All rights
 This module is free software; you can redistribute it and/or
 modify it under the same terms as Perl itself. See L<perlartistic>.
 
+=head1 REVISION INFO
+
+  Revision:      $Rev: 62 $
+  Last editor:   $Author: isillitoe $
+  Last updated:  $Date: 2009-07-06 16:01:23 +0100 (Mon, 06 Jul 2009) $
+
+The latest source code for this project can be checked out from:
+
+  https://funcnet.svn.sf.net/svnroot/funcnet/trunk
+
+=cut

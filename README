@@ -1,7 +1,9 @@
 
-WebService::Cath::FuncNet - Interface to the CATH FuncNet webservice
+WebService::FuncNet::Predictor - Interface to FuncNet prediction webservices
 
-    v0.01 - first release
+    v0.01 - first release under this name (previously WebService::Cath::FuncNet)
+    
+    See http://funcnet.eu/ for more information
 
 INSTALLATION
 

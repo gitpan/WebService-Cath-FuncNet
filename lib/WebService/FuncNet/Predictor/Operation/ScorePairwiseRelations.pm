@@ -1,14 +1,14 @@
-package WebService::Cath::FuncNet::Operation::ScorePairwiseRelations;
+package WebService::FuncNet::Predictor::Operation::ScorePairwiseRelations;
 
 =head1 NAME
 
-WebService::Cath::FuncNet::Operation::ScorePairwiseRelations
+WebService::FuncNet::Predictor::Operation::ScorePairwiseRelations
 
 =head1 SYNOPSIS
 
 Represents the 'ScorePairwiseRelations' FuncNet WebService operation
 
-  $ws = WebService::Cath::FuncNet->new();
+  $ws = WebService::FuncNet::Predictor->new();
   
   @proteins1 = qw( A3EXL0 Q8NFN7 O75865 );
   @proteins2 = qw( Q5SR05 Q9H8H3 P22676 );
@@ -26,15 +26,15 @@ Represents the 'ScorePairwiseRelations' FuncNet WebService operation
 
 use Moose;
 
-use WebService::Cath::FuncNet::Operation::ScorePairwiseRelations::Response;
+use WebService::FuncNet::Predictor::Operation::ScorePairwiseRelations::Response;
 
-extends 'WebService::Cath::FuncNet::Operation';
+extends 'WebService::FuncNet::Predictor::Operation';
 
 has '+operation' => ( default => 'ScorePairwiseRelations' );
 has '+port'      => ( default => 'GecoPort' );
 has '+service'   => ( default => sub { (shift)->root->ns_base . 'GecoService' } );
 has '+binding'   => ( default => sub { (shift)->root->ns_base . 'GecoBinding' } );
-has '+response_class' => ( default => 'WebService::Cath::FuncNet::Operation::ScorePairwiseRelations::Response' );
+has '+response_class' => ( default => 'WebService::FuncNet::Predictor::Operation::ScorePairwiseRelations::Response' );
 
 =head1 METHODS
 
@@ -45,7 +45,7 @@ of two sets of protein identifiers.
 
 Returns:
 
-  WebService::Cath::FuncNet::Operation::ScorePairwiseRelations::Response
+  WebService::FuncNet::Predictor::Operation::ScorePairwiseRelations::Response
 
 =cut
 
@@ -78,3 +78,14 @@ This module is free software; you can redistribute it and/or
 modify it under the same terms as Perl itself. See L<perlartistic>.
 
 
+=head1 REVISION INFO
+
+  Revision:      $Rev: 62 $
+  Last editor:   $Author: isillitoe $
+  Last updated:  $Date: 2009-07-06 16:01:23 +0100 (Mon, 06 Jul 2009) $
+
+The latest source code for this project can be checked out from:
+
+  https://funcnet.svn.sf.net/svnroot/funcnet/trunk
+
+=cut
