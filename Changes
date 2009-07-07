@@ -1,11 +1,8 @@
-Revision history for WebService-FuncNet-Predictor
-0.10   Mon Jul  6 16:42:10 BST 2009 (r65)
-        - Changed distribution name and namespace
-        - Minor documentation changes
-
-
-
 Revision history for WebService-Cath-FuncNet
+
+0.11   Tue Jul  7 12:11:41 BST 2009
+        - Added deprecation notice (final release)
+
 0.08   Tue May 19 11:03:03 BST 2009 (r8105)
         - Corrected version in docs
         - Added MooseX::Types to prerequisites

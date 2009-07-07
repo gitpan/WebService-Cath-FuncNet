@@ -1,14 +1,20 @@
-package WebService::FuncNet::Predictor;
+package WebService::Cath::FuncNet;
 
 =head1 NAME
 
-WebService::FuncNet::Predictor - Interface to the CATH FuncNet webservice
+WebService::Cath::FuncNet - Interface to the CATH FuncNet webservice
+
+=head1 VERSION
+
+This document describes WebService::Cath::FuncNet version 0.11
+
+B<*** Final release: this code has now been incorporated into L<WebService::FuncNet::Predictor> ***>
 
 =head1 SYNOPSIS
 
-    use WebService::FuncNet::Predictor;
+    use WebService::Cath::FuncNet;
 
-    $ws        = WebService::FuncNet::Predictor->new();
+    $ws        = WebService::Cath::FuncNet->new();
     
     @proteins1 = qw( A3EXL0 Q8NFN7 O75865 );
     @proteins2 = qw( Q5SR05 Q9H8H3 P22676 );
@@ -24,7 +30,7 @@ WebService::FuncNet::Predictor - Interface to the CATH FuncNet webservice
             ), "\n";
     }
 
-This module provides a simple API to the FuncNet predictor services and the documentation
+This module provides a simple API to the CATH FuncNet WebService and the documentation
 provided here refers to the usage and implementation of the API rather than the details
 of the actual FuncNet WebServices. For more information on FuncNet, it is best to visit
 the project homepage at:
@@ -41,8 +47,8 @@ use XML::Compile::WSDL11;
 use XML::Compile::Transport::SOAPHTTP;
 use XML::Compile::Schema;
 
-use WebService::FuncNet::Predictor::Logger;
-use WebService::FuncNet::Predictor::Operation::ScorePairwiseRelations;
+use WebService::Cath::FuncNet::Logger;
+use WebService::Cath::FuncNet::Operation::ScorePairwiseRelations;
 
 use Carp;
 use URI;
@@ -53,19 +59,18 @@ use File::Temp qw( tempfile );
 use Readonly;
 use Data::Dumper;
 
-our $VERSION = "0.10";
-
+our $VERSION = '0.11';
 
 #Readonly my $WSDL_HOST       => 'http://bsmlx47:8080';
 Readonly my $WSDL_HOST       => 'http://funcnet.eu';
 Readonly my $WSDL_REMOTE_URL => $WSDL_HOST . '/soap/Geco.wsdl';
 Readonly my $FUNCNET_NS      => '{http://funcnet.eu/FuncNet_1_0/}';
 
-with 'WebService::FuncNet::Predictor::Logable';
+with 'WebService::Cath::FuncNet::Logable';
 
 my $logger = get_logger();
 
-subtype 'WebService::FuncNet::Predictor::WSDL'
+subtype 'WebService::Cath::FuncNet::WSDL'
     => as 'Object'
     => where { $_->isa( 'XML::Compile::WSDL11' ) };
 
@@ -73,7 +78,7 @@ subtype 'Uri'
     => as 'Object'
     => where { $_->isa( 'URI' ) };
 
-coerce 'WebService::FuncNet::Predictor::WSDL'
+coerce 'WebService::Cath::FuncNet::WSDL'
     => from 'Uri'
         => via { wsdl_from_uri( $_ ) };
 
@@ -91,8 +96,6 @@ By default this is created from the URL:
 
   http://funcnet.eu/soap/Geco.wsdl
 
-but any FuncNet predictor URL can be used here; see http://funcnet.eu/wsdls/
-
 Coercions:
 
   $self->wsdl( 'uri' )
@@ -103,7 +106,7 @@ Coercions:
 
 has 'wsdl' => (
     is => 'rw',
-    isa => 'WebService::FuncNet::Predictor::WSDL',
+    isa => 'WebService::Cath::FuncNet::WSDL',
     default => sub { wsdl_from_uri( $WSDL_REMOTE_URL ) },
     coerce => 1,
 );
@@ -130,7 +133,7 @@ Provides a pairwise comparison of the relationships between two sets of proteins
   
   $response = $ws->score_pairwise_relations( [ 'A3EXL0', 'Q8NFN7' ], [ 'Q5SR05', 'Q9H8H3' ] )
 
-See L<WebService::FuncNet::Predictor::Operation::ScorePairwiseRelations>
+See L<WebService::Cath::FuncNet::Operation::ScorePairwiseRelations>
 
 =head3 PARAMS
 
@@ -146,7 +149,7 @@ ARRAY ref containing list of protein identifiers
 
 =over 8
 
-=item WebService::FuncNet::Predictor::Operation::ScorePairwiseRelations::Response
+=item WebService::Cath::FuncNet::Operation::ScorePairwiseRelations::Response
 
 =back
 
@@ -155,7 +158,7 @@ ARRAY ref containing list of protein identifiers
 sub score_pairwise_relations {
     my ( $self, $proteins1_ref, $proteins2_ref ) = @_;
 
-    my $op = WebService::FuncNet::Predictor::Operation::ScorePairwiseRelations->new(
+    my $op = WebService::Cath::FuncNet::Operation::ScorePairwiseRelations->new(
             root => $self
         );
     
@@ -352,14 +355,4 @@ Copyright (c) 2008, Ian Sillitoe C<< <sillitoe@biochem.ucl.ac.uk> >>. All rights
 This module is free software; you can redistribute it and/or
 modify it under the same terms as Perl itself. See L<perlartistic>.
 
-=head1 REVISION INFO
 
-  Revision:      $Rev: 65 $
-  Last editor:   $Author: andrew_b_clegg $
-  Last updated:  $Date: 2009-07-06 16:45:15 +0100 (Mon, 06 Jul 2009) $
-
-The latest source code for this project can be checked out from:
-
-  https://funcnet.svn.sf.net/svnroot/funcnet/trunk
-
-=cut

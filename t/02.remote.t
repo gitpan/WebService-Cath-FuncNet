@@ -12,17 +12,17 @@ else {
     plan skip_all => 'Remote tests. Set $ENV{TEST_FUNCNET_REMOTE} to a true value to run.'
 }
 
-use_ok( 'WebService::FuncNet::Predictor' );
+use_ok( 'WebService::Cath::FuncNet' );
 
 my ( $ws, $wsdl, $wsdl_uri );
 
-isa_ok( $ws = WebService::FuncNet::Predictor->new(), 'WebService::FuncNet::Predictor', 'new (default URI)' );
+isa_ok( $ws = WebService::Cath::FuncNet->new(), 'WebService::Cath::FuncNet', 'new (default URI)' );
 
 my @proteins1 = qw( A3EXL0 Q8NFN7 O75865 );
 my @proteins2 = qw( Q5SR05 Q9H8H3 P22676 );
     
 isa_ok( my $response = $ws->score_pairwise_relations( \@proteins1, \@proteins2 ), 
-        'WebService::FuncNet::Predictor::Operation::ScorePairwiseRelations::Response' );
+        'WebService::Cath::FuncNet::Operation::ScorePairwiseRelations::Response' );
 
 isa_ok( my $results_ref = $response->results, 'ARRAY' );
 

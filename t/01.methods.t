@@ -6,7 +6,7 @@ use FindBin;
 use URI::file;
 
 BEGIN {
-use_ok( 'WebService::FuncNet::Predictor' );
+use_ok( 'WebService::Cath::FuncNet' );
 }
 
 my ( $ws, $wsdl, $wsdl_uri );
@@ -15,4 +15,4 @@ $wsdl = $FindBin::Bin . '/' . 'GecoService.wsdl';
 
 $wsdl_uri = URI::file->new( $wsdl );
 
-isa_ok( $ws = WebService::FuncNet::Predictor->new( wsdl => $wsdl_uri ), 'WebService::FuncNet::Predictor', 'new (local WSDL)' );
+isa_ok( $ws = WebService::Cath::FuncNet->new( wsdl => $wsdl_uri ), 'WebService::Cath::FuncNet', 'new (local WSDL)' );

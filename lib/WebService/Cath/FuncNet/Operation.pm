@@ -1,34 +1,34 @@
-package WebService::FuncNet::Predictor::Operation;
+package WebService::Cath::FuncNet::Operation;
 
 =head1 NAME
 
-WebService::FuncNet::Predictor::Operation
+WebService::Cath::FuncNet::Operation
 
 =head1 SYNOPSIS
 
 Represents a WebService Operation - should be extended by all other operations
 
-  package WebService::FuncNet::Predictor::Operation::DoSomething;
+  package WebService::Cath::FuncNet::Operation::DoSomething;
   use Moose;
-  extends 'WebService::FuncNet::Predictor::Operation';
+  extends 'WebService::Cath::FuncNet::Operation';
   
   
 
-  $ws = WebService::FuncNet::Predictor->new();
+  $ws = WebService::Cath::FuncNet->new();
   
-  $op = WebService::FuncNet::Predictor::Operation
+  $op = WebService::Cath::FuncNet::Operation
 
 =cut
 
 use Moose;
 
-with 'WebService::FuncNet::Predictor::Logable';
+with 'WebService::Cath::FuncNet::Logable';
 
 =head1 ACCESSORS
 
 =cut
 
-has 'root'      => ( is => 'ro', isa => 'WebService::FuncNet::Predictor', required => 1 );
+has 'root'      => ( is => 'ro', isa => 'WebService::Cath::FuncNet', required => 1 );
 has 'operation' => ( is => 'rw', isa => 'Str', lazy => 1, default => '', required => 1 );
 has 'port'      => ( is => 'rw', isa => 'Str', lazy => 1, default => '', required => 1 );
 has 'service'   => ( is => 'rw', isa => 'Str', lazy => 1, default => '', required => 1 );
@@ -44,7 +44,7 @@ Calls the WebService operation with given parameter
 
 =head3 RETURNS
 
-WebService::FuncNet::Predictor::Operation::ScorePairwiseRelations::Response
+WebService::Cath::FuncNet::Operation::ScorePairwiseRelations::Response
 
 =cut
 
@@ -92,14 +92,3 @@ This module is free software; you can redistribute it and/or
 modify it under the same terms as Perl itself. See L<perlartistic>.
 
 
-=head1 REVISION INFO
-
-  Revision:      $Rev: 62 $
-  Last editor:   $Author: isillitoe $
-  Last updated:  $Date: 2009-07-06 16:01:23 +0100 (Mon, 06 Jul 2009) $
-
-The latest source code for this project can be checked out from:
-
-  https://funcnet.svn.sf.net/svnroot/funcnet/trunk
-
-=cut

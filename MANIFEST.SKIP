@@ -6,11 +6,9 @@ _build.*
 pm_to_blib.*
 .*.tar.gz
 .lwpcookies
-WebService-FuncNet-Predictor.*
+WebService-Cath-FuncNet-.*
 cover_db
 .*~
 .*\.svn.*
 \.cvsignore
 build\.conf
-^\.project
-^\.includepath

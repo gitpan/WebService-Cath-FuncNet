@@ -3,10 +3,10 @@ use warnings;
 use Module::Build;
 
 my $builder = Module::Build->new(
-    module_name         => 'WebService::FuncNet::Predictor',
+    module_name         => 'WebService::Cath::FuncNet',
     license             => 'perl',
     dist_author         => 'Ian Sillitoe <sillitoe@biochem.ucl.ac.uk>',
-    dist_version_from   => 'lib/WebService/FuncNet/Predictor.pm',
+    dist_version_from   => 'lib/WebService/Cath/FuncNet.pm',
     requires => {
         "Test::More"                        => '0.77',
         "Data::Dumper"                      => 0,

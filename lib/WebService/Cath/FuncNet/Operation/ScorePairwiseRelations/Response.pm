@@ -1,8 +1,8 @@
-package WebService::FuncNet::Predictor::Operation::ScorePairwiseRelations::Response;
+package WebService::Cath::FuncNet::Operation::ScorePairwiseRelations::Response;
 
 =head1 NAME
 
-WebService::FuncNet::Predictor::Operation::ScorePairwiseRelations::Response
+WebService::Cath::FuncNet::Operation::ScorePairwiseRelations::Response
 
 =head1 SYNOPSIS
 
@@ -12,18 +12,18 @@ Represents a response from the 'ScorePairwiseRelations' operation
     $op_call = $op->compileClient();
     $answer  = $op_call->( parameters => { ... } );
 
-    $response = WebService::FuncNet::Predictor::ScorePairwiseRelations::Response->new( $answer );
+    $response = WebService::Cath::FuncNet::ScorePairwiseRelations::Response->new( $answer );
 
 =cut
 
 use Moose;
 
-use WebService::FuncNet::Predictor::Operation::ScorePairwiseRelations::Result;
-use WebService::FuncNet::Predictor::Logger;
+use WebService::Cath::FuncNet::Operation::ScorePairwiseRelations::Result;
+use WebService::Cath::FuncNet::Logger;
 
 use Data::Dumper;
 
-with 'WebService::FuncNet::Predictor::Logable';
+with 'WebService::Cath::FuncNet::Logable';
 
 my $logger = get_logger();
 
@@ -44,13 +44,13 @@ sub BUILDARGS {
 
 =head2 results
 
-an array of WebService::FuncNet::Predictor::ScorePairwiseRelations::Result
+an array of WebService::Cath::FuncNet::ScorePairwiseRelations::Result
 
 =cut
 
 has 'results' => (
     is => 'rw',
-    isa => 'ArrayRef[WebService::FuncNet::Predictor::Operation::ScorePairwiseRelations::Result]',
+    isa => 'ArrayRef[WebService::Cath::FuncNet::Operation::ScorePairwiseRelations::Result]',
     lazy_build => 1,
 );
 
@@ -69,7 +69,7 @@ sub _results_from_wsdl_response {
     $logger->debug( 'response: ' . Dumper( $wsdl_response ) );
     
     foreach my $result ( @{ $wsdl_response->{ parameters }->{ 's' } } ) {
-        push @results, WebService::FuncNet::Predictor::Operation::ScorePairwiseRelations::Result->new(
+        push @results, WebService::Cath::FuncNet::Operation::ScorePairwiseRelations::Result->new(
                 protein_1 => $result->{p1},
                 protein_2 => $result->{p2},
                 p_value   => $result->{pv},
@@ -97,14 +97,3 @@ This module is free software; you can redistribute it and/or
 modify it under the same terms as Perl itself. See L<perlartistic>.
 
 
-=head1 REVISION INFO
-
-  Revision:      $Rev: 62 $
-  Last editor:   $Author: isillitoe $
-  Last updated:  $Date: 2009-07-06 16:01:23 +0100 (Mon, 06 Jul 2009) $
-
-The latest source code for this project can be checked out from:
-
-  https://funcnet.svn.sf.net/svnroot/funcnet/trunk
-
-=cut
